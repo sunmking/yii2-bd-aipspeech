@@ -26,9 +26,15 @@ class BdSpeech extends Component
 
     /**
      * 语言
+     * 1536	普通话(支持简单的英文识别)
+     * 1537	普通话(纯中文识别)
+     * 1737	英语
+     * 1637	粤语
+     * 1837	四川话
+     * 1936	普通话远场
      * @var array
      */
-    public $len = ['zh', 'ct', 'en'];
+    public $dev_pid = [1536,1537,1737,1637,1837,1936];
 
     /**
      * 本地文件格式
@@ -55,7 +61,7 @@ class BdSpeech extends Component
      * [可选参数]储存路径
      * @var string
      */
-    public $path;
+    public $path = null;
 
     /**
      * @var object
