@@ -6,7 +6,7 @@
 ## Installing
 
 ```shell
-$ composer require saviorlv/baidu -vvv
+$ composer require saviorlv/yii2-bd-aipspeech -vvv
 ```
 
 ## Usage
