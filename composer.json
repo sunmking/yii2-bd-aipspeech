@@ -1,0 +1,21 @@
+{
+    "name": "saviorlv/baidu",
+    "description": "Yii2 百度 语音识别",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","baidu","speech"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "saviorlv",
+            "email": "1042080686@qq.com"
+        }
+    ],
+    "require": {
+        "php":">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Saviorlv\\Baidu\\": "src"
+        }
+    }
+}
