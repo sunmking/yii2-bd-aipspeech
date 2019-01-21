@@ -1,5 +1,5 @@
 <?php
-namespace Saviorlv\Baidu;
+namespace Saviorlv\Baidu\Service;
 /*
 * Copyright (c) 2017 Baidu.com, Inc. All Rights Reserved
 *
@@ -37,8 +37,8 @@ class AipSpeech extends AipBase{
 
     /**
      * 判断认证是否有权限
-     * @param  array   $authObj 
-     * @return boolean          
+     * @param  array   $authObj
+     * @return boolean
      */
     protected function isPermission($authObj)
     {
@@ -103,7 +103,7 @@ class AipSpeech extends AipBase{
         $data['rate'] = $rate;
         $data['channel'] = 1;
 
-        $data = array_merge($data, $options);  
+        $data = array_merge($data, $options);
 
         return $this->request($this->asrUrl, $data, array());
     }
@@ -122,7 +122,7 @@ class AipSpeech extends AipBase{
         $data['lan'] = $lang;
         $data['ctp'] = $ctp;
 
-        $data = array_merge($data, $options);  
+        $data = array_merge($data, $options);
 
         $result = $this->request($this->ttsUrl, $data, array());
 
