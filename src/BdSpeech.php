@@ -18,11 +18,11 @@ use yii\helpers\FileHelper;
 class BdSpeech extends Component
 {
     /**
-     * 切割个数 http://yuyin.baidu.com/docs/tts/136
-     * 百度语音合成接口每次请求文本必须小于512个中文字或者英文数字
+     * http://ai.baidu.com/docs#/TTS-Online-PHP-SDK/top
+     * 百度语音合成接口每次请求文本必须小于1024个中文字或者英文数字
      * @var integer
      */
-    const SLICE_LENGTH = 500;
+    const SLICE_LENGTH = 1024;
 
     /**
      * 语言
@@ -34,7 +34,7 @@ class BdSpeech extends Component
      * 1936	普通话远场
      * @var array
      */
-    public $dev_pid = [1536,1537,1737,1637,1837,1936];
+    public $dev_pids = [1536,1537,1737,1637,1837,1936];
 
     /**
      * 本地文件格式
@@ -92,14 +92,13 @@ class BdSpeech extends Component
      *
      * @param $filePath string 语音文件本地路径,优先使用此项
      * @param $url string 语音文件URL路径
-     * @param $callback string 回调地址
      * @param $userID string 用户唯一标识
      * @param $format string 语音文件格式 ['pcm', 'wav', 'opus', 'speex', 'amr']
      * @param $rate integer 采样率 [8000, 16000]
-     * @param $lan string 语音 ['zh', 'ct', 'en']
+     * @param $dev_pid int 语音语言 [1536,1537,1737,1637,1837,1936]
      * @return array
      */
-    public function recognize($filePath, $url, $callback, $format = 'wav', $lan = 'zh', $userID = null, $rate = 16000)
+    public function recognize($filePath, $url, $format = 'wav', $dev_pid = 1536, $userID = null, $rate = 16000)
     {
         $return = ['success' => false, 'msg' => '网络超时'];
         if (!$filePath && !$url) {
@@ -110,6 +109,9 @@ class BdSpeech extends Component
             $return['msg'] = '语音文件路径错误';
             return $return;
         }
+        if($url){
+            $filePath = $url;
+        }
         if (!in_array($format, $this->format)) {
             $return['msg'] = '语音文件格式错误,当前支持以下格式:pcm（不压缩）、wav、amr';
             return $return;
@@ -118,20 +120,15 @@ class BdSpeech extends Component
             $return['msg'] = '采样率错误，当前支持8000或者16000';
             return $return;
         }
-        if (!in_array($lan, $this->len)) {
-            $return['msg'] = '语言错误，当前支持中文(zh)、粤语(ct)、英文(en)';
+        if (!in_array($dev_pid, $this->dev_pids)) {
+            $return['msg'] = '语言错误，当前支持：1536	普通话(支持简单的英文识别)、 1537	普通话(纯中文识别) 1737	英语、 1637	粤语、 1837	四川话、1936	普通话远场';
             return $return;
         }
 
         $options = [
-            'lan' => $lan
+            'dev_pid' => $dev_pid
         ];
-        if (!$filePath && $url) {
-            $options['url'] = $url;
-        }
-        if ($callback) {
-            $options['callback'] = $callback;
-        }
+
         if ($userID) {
             $options['cuid'] = $userID;
         }
