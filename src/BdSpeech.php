@@ -93,7 +93,7 @@ class BdSpeech extends Component
      * @param $filePath string 语音文件本地路径,优先使用此项
      * @param $url string 语音文件URL路径
      * @param $userID string 用户唯一标识
-     * @param $format string 语音文件格式 ['pcm', 'wav', 'opus', 'speex', 'amr']
+     * @param $format string 语音文件格式 ['pcm', 'wav', 'amr']
      * @param $rate integer 采样率 [8000, 16000]
      * @param $dev_pid int 语音语言 [1536,1537,1737,1637,1837,1936]
      * @return array
