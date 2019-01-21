@@ -1,5 +1,5 @@
 {
-    "name": "saviorlv/baidu",
+    "name": "saviorlv/yii2-bd-aipspeech",
     "description": "Yii2 百度 语音识别",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","baidu","speech"],
